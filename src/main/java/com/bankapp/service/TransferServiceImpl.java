@@ -1,6 +1,7 @@
 package com.bankapp.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import com.bankapp.repository.TransferRepository;
 
 
 @Service
-public class TransferServiceImpl {
+public class TransferServiceImpl implements TransferService {
 	
 	@Autowired
 	private AccountService accountService;
@@ -28,6 +29,7 @@ public class TransferServiceImpl {
         if (senderOpt.isPresent() && receiverOpt.isPresent()) {
             Account sender = senderOpt.get();
             Account receiver = receiverOpt.get();
+            
 
             if (sender.getAmount() >= money) {
                 // Deduct money from sender
@@ -58,6 +60,12 @@ public class TransferServiceImpl {
             return "Sender or Receiver not found.";
         }
     }
+
+	@Override
+	public List<Transfer> getall() {
+		
+		return transferRepository.findAll();
+	}
 
 
 }

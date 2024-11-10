@@ -100,7 +100,7 @@ public class AccountServiceImpl implements AccountService {
 //		}
 		
 		
-	}
+//	}
     public void updateBalance(Account account, Double newAmount) {
         account.setAmount(newAmount);
         accountRepository.save(account);
