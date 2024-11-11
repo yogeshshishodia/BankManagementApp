@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.bankapp.entity.Account;
 import com.bankapp.repository.AccountRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -112,4 +114,8 @@ public class AccountServiceImpl implements AccountService {
 	public Account findByAccountHolderName(String accountHolderName) {
 		return accountRepository.findByAccountHolderName(accountHolderName);
 	}
+
+	
+
+
 }
