@@ -13,8 +13,10 @@ import com.bankapp.entity.LoanStatus;
 import com.bankapp.repository.LoanRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 
 @Service
+@Transactional
 public class LoanService {
 
     @Autowired
@@ -23,16 +25,17 @@ public class LoanService {
     @Autowired
     private AccountService accountService;
 
-    public Loan applyForLoan(Long accountId, double amount, double interestRate, int tenure) {
+    public Loan applyForLoan(Long accountId, double loanAmount, double interestRate, int tenure) {
         Loan loan = new Loan();
         loan.setAccountId(accountId);
-        loan.setLoanAmount(amount);
-        loan.setRemainingBalance(amount);
+        loan.setLoanAmount(loanAmount);
+        loan.setRemainingBalance(loanAmount);
         loan.setInterestRate(interestRate);
         loan.setTenure(tenure);
         loan.setStartDate(LocalDate.now());
         loan.setNextDueDate(LocalDate.now().plusMonths(1)); // Example for monthly payments
         loan.setStatus(LoanStatus.PENDING);
+        
         return loanRepository.save(loan);
     }
 
@@ -51,6 +54,7 @@ public class LoanService {
         
         // Disburse the loan amount to the account
         accountService.deposit(loan.getAccountId(), loan.getLoanAmount());
+        
 
         // Save the loan with the updated status
         return loanRepository.save(loan);

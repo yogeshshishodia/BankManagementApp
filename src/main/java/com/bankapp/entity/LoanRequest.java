@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class LoanRequest {
     private Long accountId;
-    private double amount;
+    private double loanAmount;
     private double interestRate;
     private int tenure;
     // Getters and Setters

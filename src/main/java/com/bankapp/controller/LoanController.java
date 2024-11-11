@@ -29,7 +29,7 @@ public class LoanController {
 
     @PostMapping("/apply")
     public ResponseEntity<Loan> applyForLoan(@RequestBody LoanRequest loanRequest) {
-        Loan loan = loanService.applyForLoan(loanRequest.getAccountId(), loanRequest.getAmount(), 
+        Loan loan = loanService.applyForLoan(loanRequest.getAccountId(), loanRequest.getLoanAmount(), 
                                              loanRequest.getInterestRate(), loanRequest.getTenure());
         return new ResponseEntity<>(loan, HttpStatus.CREATED);
     }
