@@ -3,6 +3,7 @@ package com.bankapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import com.bankapp.entity.Account;
 import com.bankapp.service.AccountService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class AccountController {
 	
 	@Autowired
@@ -33,6 +35,7 @@ public class AccountController {
 		
 	}
 	
+	@CrossOrigin("*")
 	@PutMapping("/deposit/{accountNumber}/{amount}")
 	public  Account deposit(@PathVariable Long accountNumber, @PathVariable Double amount) {
 		Account acc=accountService.deposit(accountNumber, amount);
@@ -47,6 +50,7 @@ public class AccountController {
 		
 	}
 	
+	@CrossOrigin("*")
 	@GetMapping("/getall")
 	public List<Account>getall(){
 		return accountService.getAllAccountDetails();
